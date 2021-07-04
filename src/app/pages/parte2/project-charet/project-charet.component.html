@@ -1,0 +1,92 @@
+<!-- Page-header start -->
+<div class="">
+  <div class="page-header card">
+    <div class="row align-items-end">
+      <div class="col-lg-8">
+        <div class="page-header-title">
+          <span><i class="icofont icofont-bag-alt bg-c-green"></i></span>
+          <div class="d-inline">
+            <span class="d-block">
+              <h4>Etat d'avancement d'un projet</h4>
+            </span>
+            <span> </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="page-header-breadcrumb">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a [routerLink]="'/'">
+                <i class="icofont icofont-home"></i>
+              </a>
+            </li>
+            <li class="breadcrumb-item">
+
+              <a></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [title]="'List des Projets'">
+      <label for="srch">Recherche</label>&nbsp;&nbsp;&nbsp;&nbsp;
+      <input id="serch" type="text" [(ngModel)]="term">
+      <br />
+      <br />
+      <!--   
+        <div style="float: right;margin-right: 30px;">
+          <button type="button" class="btn btn-primary" (click)="open()">Ajouter</button>
+       
+        </div> -->
+      <div class="table-responsive">
+
+        <table class="table table-dark">
+          <thead>
+            <tr>
+              <th scope="col" style="text-align: center;">Nom projet</th>
+              <th scope="col" style="text-align: center;">Pourcentage </th>
+              <th scope="col" style="text-align: center;" colspan="2">Etat D'avancement </th>
+              <th scope="col" style="text-align: center;">Action</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let item of this.listproject |filter:term | paginate: { itemsPerPage: 3, currentPage: p }  ">
+            <tr style="text-align: center;">
+              <td>{{item.nom_project}}</td>
+              <td *ngIf="item.etat=='0'">{{item.porsontage}} %</td>
+              <td *ngIf="item.etat=='1'">{{100}} %</td>
+              <td colspan="2" *ngIf="item.etat=='0'">
+                {{item.nom_project+" "+item.porsontage+'%'}}
+                <div class="first">
+                  <div [ngStyle]="{'width.%':item.porsontage}" class="second">
+                  </div>
+                </div>
+
+              </td>
+              <td colspan="2" *ngIf="item.etat=='1'">
+                {{"Terminer"}}
+                <div class="first">
+                  <div [ngStyle]="{'width.%':100}" class="second">
+                  </div>
+                </div>
+              </td>
+              <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-info" [routerLink]="['/dashboard/detailetache',item.id_projet]">detailles</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <center>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </center>
+      </div>
+
+    </app-card>
+  </div>
+</div>

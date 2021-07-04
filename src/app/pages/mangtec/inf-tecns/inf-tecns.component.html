@@ -1,0 +1,42 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{this.titre}} </h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <table>
+    <tbody>
+      <tr>
+        <td>CIN :</td>
+        <td class="class1">{{this.obj.cin}}</td>
+      </tr>
+
+      <tr>
+        <td>Nom et Prenom :</td>
+        <td class="class1">{{this.obj.nom+" "+this.obj.prenom}}</td>
+      </tr>
+
+      <tr>
+        <td>Tel :</td>
+        <td class="class1">
+          {{this.obj.tel}}
+        </td>
+      </tr>
+      <tr>
+        <td>Email :</td>
+        <td class="class1">{{this.obj.email}}</td>
+      </tr>
+      <tr>
+        <td>Adress :</td>
+        <td class="class1">{{this.obj.adress}}</td>
+      </tr>
+
+
+    </tbody>
+  </table>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Fermer</button>
+</div>

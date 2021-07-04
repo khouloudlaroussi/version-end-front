@@ -1,0 +1,87 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{this.titre}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form name="form" #f="ngForm" novalidate>
+    <div class="modal-body">
+
+        <div class="form-group">
+            <label for="exampleInputEmail1">Nom :</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nom" name="nom"
+                [(ngModel)]="this.model.nom" #nom="ngModel" [ngClass]="{ 'is-invalid': (nom.invalid) && nom.touched }"
+                required>
+            <div *ngIf="(nom.invalid) && nom.touched" class="invalid-feedback">
+                <div *ngIf="nom.errors.required">Nom user Obligatoire !!
+
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Prenom :</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Prenom" name="prenom"
+                [(ngModel)]="this.model.prenom" #prenom="ngModel"
+                [ngClass]="{ 'is-invalid': (prenom.invalid) && prenom.touched }" required>
+            <div *ngIf="(prenom.invalid) && prenom.touched" class="invalid-feedback">
+                <div *ngIf="prenom.errors.required">prenom user Obligatoire !!
+
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">CIN :</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="CIN" name="cin"
+                [(ngModel)]="this.model.cin" #cin="ngModel" [ngClass]="{ 'is-invalid': (cin.invalid) && cin.touched }"
+                required minlength="8" maxlength="8" [disabled]="!this.addp">
+            <div *ngIf="(cin.invalid) && cin.touched" class="invalid-feedback">
+                <div *ngIf="cin.errors.required">cin user Obligatoire !!</div>
+                <div *ngIf="cin.errors.minlength">Min CIN length 8 !!</div>
+                <div *ngIf="cin.errors.maxlength">Max CIN length 8 !!</div>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Tel</label>
+            <input type="tel" class="form-control" id="exampleInputEmail1" placeholder="Tel" name="tel"
+                [(ngModel)]="this.model.tel" #tel="ngModel" [ngClass]="{ 'is-invalid': (tel.invalid) && tel.touched }"
+                required>
+            <div *ngIf="(tel.invalid) && tel.touched" class="invalid-feedback">
+                <div *ngIf="tel.errors.required">tel user Obligatoire !!
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email :</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="exmple@exmple..." name="email"
+                [(ngModel)]="this.model.email" #email="ngModel"
+                [ngClass]="{ 'is-invalid': (email.invalid) && email.touched }" required email>
+            <div *ngIf="(email.invalid) && email.touched" class="invalid-feedback">
+                <div *ngIf="email.errors.required">email Obligatoire !!</div>
+                <div *ngIf="email.errors.email">email non valide !!</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Adress</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Adress" name="adress"
+                [(ngModel)]="this.model.adress" #adress="ngModel"
+                [ngClass]="{ 'is-invalid': (adress.invalid) && adress.touched }" required>
+            <div *ngIf="(adress.invalid) && adress.touched" class="invalid-feedback">
+                <div *ngIf="adress.errors.required"> adress Obligatoire !!
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</form>
+<div class="modal-footer">
+    <button *ngIf="this.addp" type="button" class="btn btn-success" [disabled]="f.invalid"
+        (click)="add()">Ajouter</button>
+    <button *ngIf="!this.addp" type="button" class="btn btn-warning" [disabled]="f.invalid"
+        (click)="update()">Modifer</button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Annuler</button>
+</div>

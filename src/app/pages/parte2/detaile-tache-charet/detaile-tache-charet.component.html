@@ -1,0 +1,83 @@
+<!-- Page-header start -->
+<div class="">
+    <div class="page-header card">
+      <div class="row align-items-end">
+        <div class="col-lg-8">
+          <div class="page-header-title">
+            <span><i class="icofont icofont-home bg-c-pink"></i></span>
+            <div class="d-inline">
+              <span class="d-block"><h4>Nombre des sujets et des commentaires</h4></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="page-header-breadcrumb">
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a [routerLink]="'/'">
+                  <i class="icofont icofont-home"></i>
+                </a>
+              </li>
+              <li class="breadcrumb-item">
+  
+                <a>ABC</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Page-header end -->
+  
+  <div class="row">
+    <div class="col-sm-12">
+
+      
+
+
+      <app-card [title]="''">
+        <label for="srch">Recherche</label>&nbsp;&nbsp;&nbsp;&nbsp;
+        <input id="serch" type="text" [(ngModel)]="term">
+        <div style="display: flex;justify-content: center;">
+        </div>
+        <div class="table-responsive">
+          <br>
+          <br>
+          <table class="table table-dark">
+            <thead>
+              <tr>
+                <th scope="col" style="text-align: center;">technicien</th>
+                <th scope="col" style="text-align: center;">Nbr Sujet </th>
+                <th scope="col" style="text-align: center;" >Nbr commentaire </th>
+              </tr>
+            </thead>
+            
+              <tbody *ngFor="let item of this.MayList |filter:term | paginate: { itemsPerPage: 3, currentPage: p }  ">
+                <tr style="text-align: center;">
+                    <td>{{item.nom+" "+item.prenom}}</td>
+                    <td>{{item.nbr_sujet}}</td>
+                    <td>{{item.nbrCom}}</td>
+                </tr>
+
+              </tbody>
+           
+  
+          </table>
+          <center>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </center>
+  
+        </div>
+  
+      </app-card>
+
+
+
+
+
+
+    </div>
+  </div>
+  

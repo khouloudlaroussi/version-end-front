@@ -1,0 +1,45 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{this.titre}} </h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+
+  <table>
+    <tbody>
+      <tr>
+        <td>Title :</td>
+        <td class="class1">{{this.obj.titre}}</td>
+      </tr>
+      <tr>
+        <td>Descrption :</td>
+        <td class="class1">{{this.obj.description_sujet}}</td>
+      </tr>
+      <tr>
+        <td>Etat :</td>
+        <td class="class1">
+          <span *ngIf="this.obj.etat=='0'" style="background-color:red;"> En cour </span>
+          <span *ngIf="this.obj.etat=='1'" style="background-color:rgb(21, 255, 0);"> Resolu </span>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+  <br><br>
+  <div class="list-group">
+    <center> <a style="color: #FFFFFF;font-weight: 700;" class="list-group-item list-group-item-action active">
+        Tag
+      </a></center>
+    <!--  -->
+    <ng-container *ngFor="let item of this.listTag">
+      <a class="list-group-item list-group-item-action">{{item.mot_cle}}</a>
+    </ng-container>
+  </div>
+  <br><br>
+  <button type="button" class="btn btn-link" (click)="gotToCom()">Afficher Les Commentaires</button>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Fermer</button>
+</div>

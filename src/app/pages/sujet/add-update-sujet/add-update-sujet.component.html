@@ -1,0 +1,52 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{this.tet}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form name="form" #f="ngForm" novalidate>
+  <div class="modal-body">
+
+    <div class="form-group">
+      <label for="nomtache">Titre :</label>
+      <input type="text" class="form-control" id="nomtache" placeholder="titre" name="titre"
+        [(ngModel)]="this.model.titre" #titre="ngModel" [ngClass]="{ 'is-invalid': (titre.invalid) && titre.touched }"
+        required>
+      <div *ngIf="(titre.invalid) && titre.touched" class="invalid-feedback">
+        <div *ngIf="titre.errors.required">titre Obligatoire !!
+
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="nomtache">Description sujet:</label>
+      <input type="text" class="form-control" id="description_sujet" placeholder="description_sujet"
+        name="description_sujet" [(ngModel)]="this.model.description_sujet" #description_sujet="ngModel"
+        [ngClass]="{ 'is-invalid': (description_sujet.invalid) && description_sujet.touched }" required>
+      <div *ngIf="(description_sujet.invalid) && description_sujet.touched" class="invalid-feedback">
+        <div *ngIf="description_sujet.errors.required">description Obligatoire !!
+
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="mot_cle">Tag</label>
+      <textarea class="form-control" id="mot_cle" rows="3" name="mot_cle" [(ngModel)]="this.model.mot_cle"
+        #mot_cle="ngModel" placeholder="les valeure sont separe par ** exmp tag1**tag2...etc"
+        [ngClass]="{ 'is-invalid': ( mot_cle.invalid) && mot_cle.touched }" required minlength="5"></textarea>
+      <div *ngIf="(mot_cle.invalid) && mot_cle.touched" class="invalid-feedback">
+        <div *ngIf="mot_cle.errors.required">tag Obligatoire !!</div>
+
+      </div>
+    </div>
+  </div>
+</form>
+<div class="modal-footer">
+  <button *ngIf="this.addp" type="button" class="btn btn-success" [disabled]="f.invalid"
+    (click)="addsujet()">Ajouter</button>
+  - <button *ngIf="!this.addp" type="button" class="btn btn-warning" [disabled]="f.invalid"
+    (click)="updatesuject()">Modifer</button>
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Annuler</button>
+</div>

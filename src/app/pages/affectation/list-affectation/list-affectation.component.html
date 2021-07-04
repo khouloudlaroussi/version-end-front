@@ -1,0 +1,99 @@
+<div class="">
+  <div class="page-header card">
+    <div class="row align-items-end">
+      <div class="col-lg-8">
+        <div class="page-header-title">
+          <span><i class="icofont icofont-attachment bg-c-green"></i></span>
+          <div class="d-inline">
+            <span class="d-block">
+              <h4>Liste des taches affecter </h4>
+            </span>
+            <span>Ajouter,Modifer,Suprimer et consulter les affectation </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="page-header-breadcrumb">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a [routerLink]="'/'">
+                <i class="icofont icofont-home"></i>
+              </a>
+            </li>
+            <li class="breadcrumb-item">
+
+              <a>Ajouter,Modifer,Suprimer,Lister</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [title]="'List des Projets'">
+      <label for="srch">Recherche</label>&nbsp;&nbsp;&nbsp;&nbsp;
+      <input id="serch" type="text" [(ngModel)]="term">
+      <div style="float: right;margin-right: 30px;">
+        <button type="button" class="btn btn-primary" (click)="open()">Ajouter</button>
+        <br />
+        <br />
+      </div>
+      <div style="display: flex;justify-content: center;">
+        <div class="form-group col-md-7">
+          <br>
+          <br>
+          <label for="inputState">Projet</label>
+          <select id="inputState" class="form-control" (change)="gteValue($event.target.value)">
+            <option selected value="-1">sélectionner un projet</option>
+            <option *ngFor="let item of this.listproject" value="{{item.id_projet }}">{{item.nom_project}}</option>
+          </select>
+
+        </div>
+
+
+      </div>
+
+
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col" style="text-align: center;">Nom et Prnom technicien </th>
+            <th scope="col" style="text-align: center;">Nom Tache</th>
+            <th scope="col" style="text-align: center;">Etat</th>
+            <th scope="col" style="text-align: center;">Action</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <!--  -->
+        <tbody *ngFor="let item of this.listaffectation |filter:term | paginate: { itemsPerPage: 3, currentPage: p } 
+           ">
+          <tr style="text-align: center;">
+            <td>{{item.nom+" "+item.prenom}}</td>
+            <td>{{item.nom_tache}}</td>
+            <td>
+              <span *ngIf="item.etat_tache=='0'">En attente</span>
+              <span *ngIf="item.etat_tache=='1'">En cour </span>
+              <span *ngIf="item.etat_tache=='2'">terminer</span>
+            </td>
+            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <button type="button" class="btn btn-danger" (click)="deleteaffec(item.id_affectation)">Annuler</button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <center>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </center>
+
+    </app-card>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{this.titre}} </h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <table>
+    <tbody>
+      <tr>
+        <td>Nom :</td>
+        <td class="class1">{{this.obj.nom_tache}}</td>
+      </tr>
+
+      <tr>
+        <td>Descrption :</td>
+        <td class="class1">{{this.obj.description_tache}}</td>
+      </tr>
+      <tr>
+        <td>Etat :</td>
+        <td class="class1">
+          <span *ngIf="this.obj.etat_tache=='0'"> En cour </span>
+          <span *ngIf="this.obj.etat_tache=='1'"> terminer </span>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+</div>
+<div class="modal-footer">
+  
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Fermer</button>
+</div>

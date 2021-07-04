@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{this.titre}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+
+  <div>
+    <label>Tache :</label>
+    <select multiple class="form-control" id="exampleFormControlSelect1" [(ngModel)]="this.model.id_tach"
+      #id_tach="ngModel">
+      <option *ngFor="let item of this. listtache" value="{{item.id_tache }}">{{item.nom_tache}}</option>
+    </select>
+  </div>
+  <div>
+    <label>Nom technicien :</label>
+    <select multiple class="form-control" id="exampleFormControlSelect2" [(ngModel)]="this.model.id_user"
+      #id_user="ngModel">
+      <option *ngFor="let item of this.listuser" value="{{item.id_user }}">{{item.nom+" "+item.prenom}}</option>
+    </select>
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <button *ngIf="this.addp" type="button" class="btn btn-success" (click)="addaffectation()">Ajouter</button>
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Annuler</button>
+</div>

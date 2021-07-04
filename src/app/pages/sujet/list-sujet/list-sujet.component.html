@@ -1,0 +1,102 @@
+<!-- Page-header start -->
+<div class="">
+  <div class="page-header card">
+    <div class="row align-items-end">
+      <div class="col-lg-8">
+        <div class="page-header-title">
+          <span><i class="icofont icofont-list bg-c-pink"></i></span>
+          <div class="d-inline">
+            <span class="d-block">
+              <h4>List des sujet </h4>
+            </span>
+            <span>Ajouter,Suprimer et Lister un sujet </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="page-header-breadcrumb">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a [routerLink]="'/'">
+                <i class="icofont icofont-home"></i>
+              </a>
+            </li>
+            <li class="breadcrumb-item">
+
+              <a>Ajouter,Suprimer,Lister un sujet</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Page-header end -->
+
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [title]="'List des sujets'">
+      <label for="srch">Recherche</label>&nbsp;&nbsp;&nbsp;&nbsp;
+      <input id="serch" type="text" [(ngModel)]="term">
+      <div style="display: flex;justify-content: center;">
+        <div style="text-align: center;" class="form-group col-md-5">
+          <br>
+          <br>
+          <label for="inputState">Tache En cour </label>
+          <select id="inputState" class="form-control" (change)="gteValue($event.target.value)">
+            <option value="-1" selected>selectione une Tache</option>
+            <option *ngFor="let item of this.listetache" value="{{item.id_tache }}">{{item.nom_tache}}</option>
+          </select>
+
+        </div>
+      </div>
+      <div style="display: flex;justify-content: center;">
+
+
+
+      </div>
+      <div style="float: right;margin-right: 30px;">
+        <button type="button" class="btn btn-primary" (click)="open()">Ajouter sujet</button>
+        <br />
+        <br />
+      </div>
+      <div class="table-responsive">
+        <table class="table table-dark">
+          <thead>
+            <tr>
+              <th scope="col" style="text-align: center;">titre sujet</th>
+              <th scope="col" style="text-align: center;"> etat </th>
+              <th scope="col" style="text-align: center;"> Action</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let item of this.listsujet |filter:term | paginate: { itemsPerPage: 3, currentPage: p }  ">
+            <tr style="text-align: center;">
+              <td>{{item.titre}}</td>
+              <td>
+                <span *ngIf="item.etat == '0'" style="color:rgb(255, 0, 0);font-weight: 900;">En Cours</span>
+                <span *ngIf="item.etat == '1'" style="color:rgb(30, 255, 0);font-weight: 900;">Résolu</span>
+              </td>
+              <td>
+                <button type="button" class="btn btn-warning" (click)="update(item)">Modifer</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-danger" (click)="supprimer(item.id_sujet)">Supprimer </button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-info" (click)="info(item)">detailles</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <button *ngIf="item.etat == '0'" type="button" class="btn btn-success" (click)="termineOuvrireSuject('1',item.id_sujet)">Terminer</button>
+                <button *ngIf="item.etat == '1'" type="button" class="btn btn-secondary" (click)="termineOuvrireSuject('0',item.id_sujet)">Ouvrire</button>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <center>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </center>
+
+      </div>
+
+    </app-card>
+  </div>
+</div>

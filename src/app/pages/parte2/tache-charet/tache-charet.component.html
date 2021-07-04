@@ -1,0 +1,122 @@
+<!-- Page-header start -->
+<div class="">
+    <div class="page-header card">
+      <div class="row align-items-end">
+        <div class="col-lg-8">
+          <div class="page-header-title">
+            <span><i class="icofont icofont-home bg-c-pink"></i></span>
+            <div class="d-inline">
+              <span class="d-block"><h4>Etat d'avancement d'une tache</h4></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="page-header-breadcrumb">
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a [routerLink]="'/'">
+                  <i class="icofont icofont-home"></i>
+                </a>
+              </li>
+              <li class="breadcrumb-item">
+  
+                <a>ABC</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Page-header end -->
+  
+  <div class="row">
+    <div class="col-sm-12">
+      <app-card [title]="'Liste des Taches'">
+        <label for="srch">Recherche</label>&nbsp;&nbsp;&nbsp;&nbsp;
+        <input id="serch" type="text" [(ngModel)]="term">
+        <div style="display: flex;justify-content: center;">
+        </div>
+        <div class="table-responsive">
+          <br>
+          <br>
+          <table class="table table-dark">
+            <thead>
+              <tr>
+                <th scope="col" style="text-align: center;">Nom Tache</th>
+                <th scope="col" style="text-align: center;">Nbr Sujet total </th>
+                <th scope="col" style="text-align: center;">Pourcentage </th>
+                <th scope="col" style="text-align: center;" colspan="2">Etat d'avancement</th>
+                
+
+                <th scope="col" style="text-align: center;">Action</th>
+                <th></th>
+              </tr>
+            </thead>
+            <ng-container *ngIf="this.listtache.length>0">
+              <tbody *ngFor="let item of this.listtache |filter:term | paginate: { itemsPerPage: 3, currentPage: p }  ">
+                <tr style="text-align: center;">
+                  <td>{{item.nom_tache}}</td>
+                  <td>{{item.ttnbrSuject}}</td>
+                  <td *ngIf="item.etat_tache=='1'">{{(this.sharedservice.calculateDiff(item.date_debut_tache)/this.sharedservice.calculateDiffTow(item.date_fin_tache,item.date_debut_tache)*100 ).toFixed(2) +'%'}}</td>
+                  <td *ngIf="item.etat_tache=='2'">{{100}} %</td>
+                  <td *ngIf="item.etat_tache=='0'">{{0}} %</td>
+
+                  <td colspan="2" *ngIf="item.etat_tache=='1'">
+    
+    
+                    {{item.nom_tache+" "+(this.sharedservice.calculateDiff(item.date_debut_tache)/this.sharedservice.calculateDiffTow(item.date_fin_tache,item.date_debut_tache)*100 ).toFixed(2)+'%'}}
+                    <div class="first">
+                      <div [ngStyle]="{'width.%':(this.sharedservice.calculateDiff(item.date_debut_tache)/this.sharedservice.calculateDiffTow(item.date_fin_tache,item.date_debut_tache)*100 ).toFixed(2)}" class="second">
+                      </div>
+                    </div>
+    
+                  </td>
+                  <td colspan="2" *ngIf="item.etat_tache=='2'">
+                    {{"Terminer"}}
+                    <div class="first">
+                      <div [ngStyle]="{'width.%':100}" class="second">
+                      </div>
+                    </div>
+                  </td>
+                  <td colspan="2" *ngIf="item.etat_tache=='0'">
+                    {{"Terminer"}}
+                    <div class="first">
+                      <div [ngStyle]="{'width.%':0}" class="second">
+                      </div>
+                    </div>
+                  </td>
+
+
+
+                  <td>
+                    <button type="button" class="btn btn-info" [routerLink]="['/dashboard/detailestattache',item.id_tache]">detailles</button>
+                  </td>
+                </tr>
+              </tbody>
+            </ng-container>
+            <ng-container *ngIf="this.listtache.length===0">
+              <tbody>
+                <tr style="text-align: center;">
+                  <td colspan="5">
+                    Pas de donne 
+                  </td>
+  
+                </tr>
+  
+  
+              </tbody>
+            </ng-container>
+  
+          </table>
+          <center>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </center>
+  
+        </div>
+  
+      </app-card>
+    </div>
+  </div>
+  

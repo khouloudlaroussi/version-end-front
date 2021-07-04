@@ -1,0 +1,45 @@
+<div class="modal-header">
+  <h4 class="modal-title"> Information </h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+
+  <table>
+    <tbody>
+    
+      <tr>
+        <td>Dure project :</td>
+        <td class="class1">{{this.obj.dure_project}} jours </td>
+      </tr>
+      <tr>
+        <td>Nom project :</td>
+        <td class="class1">{{this.obj.nom_project}}</td>
+      </tr>
+      <tr>
+        <td>Date debut :</td>
+        <td class="class1">{{this.obj.date_debut_project}}</td>
+      </tr>
+      <tr>
+        <td>Date Fin :</td>
+        <td class="class1">{{this.obj.date_fin_project}}</td>
+      </tr>
+      <tr>
+        <td>Descrption :</td>
+        <td class="class1">{{this.obj.description_projet}}</td>
+      </tr>
+      <tr>
+        <td>Etat :</td>
+        <td class="class1">
+          <span *ngIf="this.obj.etat=='0'"> En cour </span>
+          <span *ngIf="this.obj.etat=='1'"> Terminer </span>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Fermer</button>
+</div>

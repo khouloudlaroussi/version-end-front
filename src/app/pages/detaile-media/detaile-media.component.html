@@ -1,0 +1,19 @@
+<div class="card">
+  <center> <img *ngIf="this.type == 'PNG' || this.type=='JPG' " class="card-img-top"
+      src="./../../../assets/fileUploade/{{this.obj.data}}" style="    max-width: 100%;
+      height: auto;" alt="Card image cap"></center>
+  <video *ngIf="this.type=='MP4'" src="./../../../assets/fileUploade/{{this.obj.data}}" autoplay loop></video>
+  <div class="card-body">
+    <a class="media-left" href="javascript:;">
+    </a>
+    <p>
+      <img class="media-object img-radius comment-img" src="./../../../assets/imgsuject/user2.png"
+        alt="Generic placeholder image" style="margin-left:10px;margin-top: 14px;vertical-align:middle;"><a
+        style="margin-left:10px;margin-top: 14px;" href="">{{obj.nom+" "+obj.prenom}}</a>
+    </p>
+
+    <p style="margin-left: 50px;" class="card-text">{{this.obj.description}}</p>
+    <span><a href="javascript:;" class="m-r-10 f-12" (click)="addJame(this.obj.id_commentaire)">j'aime</a></span><span>
+    </span>
+  </div>
+</div>

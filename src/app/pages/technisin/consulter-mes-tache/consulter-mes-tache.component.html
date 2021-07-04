@@ -1,0 +1,334 @@
+<!--profile cover start-->
+<ng-container>
+  <div class="page-header card">
+    <div class="row align-items-end">
+      <div class="col-lg-8">
+        <div class="page-header-title">
+          <span><i class="icofont icofont-layers bg-c-green"></i></span>
+          <div class="d-inline">
+            <span class="d-block">
+              <h4>Etat de mes taches</h4>
+            </span>
+            <span>Etat de mes taches</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="page-header-breadcrumb">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a [routerLink]="'/'">
+                <i class="icofont icofont-home"></i>
+              </a>
+            </li>
+            <li class="breadcrumb-item">
+              <a>Consultation l'etat de mes taches</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--profile cover end-->
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="md-tabs">
+        <ngb-tabset (tabChange)="changeEtat($event)">
+          <ngb-tab title="En attente" [id]="0">
+            <ng-template ngbTabContent>
+              <div class="m-t-15">
+                <div class="card">
+
+                  <div class="col-sm-12">
+                    <div class="card-header">
+                      <h5 class="card-header-text"> </h5>
+                    </div>
+
+                    <div class="container">
+
+                      <div class="row">
+
+
+
+                      </div>
+                    </div>
+
+
+
+                    <label for="srch">Recherche</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="serch" type="text" [(ngModel)]="term">
+                    <div class="table-responsive">
+                      <div style="margin: 60px; overflow-x: auto">
+                        <table class="table table-hover">
+                          <thead>
+                            <ng-container matColumnDef="actions">
+                              <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                              <mat-cell *matCellDef="let row">
+                                <button mat-button>Edit</button>
+                              </mat-cell>
+                            </ng-container>
+                            <tr style="text-align: center">
+
+                              <th scope="col">Nom Tache</th>
+                              <th scope="col">Nom projet</th>
+                              <th scope="col">Date debut</th>
+                              <th scope="col">Date fin</th>
+                              <th scope="col">Opération</th>
+                            </tr>
+                          </thead>
+                          <ng-container *ngIf="this.listetache.length ">
+                            <tbody
+                              *ngFor="let item of this.listetache |filter:term | paginate: { itemsPerPage: 3, currentPage: p } ">
+                              <tr style="text-align: center">
+                                <td>{{item.nom_tache}}</td>
+                                <td>{{item.nom_project}}</td>
+                                <td>{{item.date_debut_tache}}</td>
+                                <td>{{item.date_fin_tache}}</td>
+                                <td>
+                                  <button type="button" class="btn btn-success"
+                                    (click)="this.startTache(item.id_tache)">Commencer </button>
+
+                                </td>
+
+                                <td>
+
+                                </td>
+                              </tr>
+                            </tbody>
+                          </ng-container>
+                          <ng-container *ngIf="this.listetache.length === 0">
+                            <tbody>
+                              <tr style="text-align: center">
+                                <td>Pas de donnenene</td>
+                              </tr>
+                            </tbody>
+                          </ng-container>
+                          <ng-container *ngIf="this.listetache[0]===null">
+                            <tbody>
+                              <tr style="text-align: center">
+                                <td colspan="5">Chargement ...</td>
+                              </tr>
+                            </tbody>
+                          </ng-container>
+
+                        </table>
+                        <center>
+                          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                        </center>
+
+                      </div>
+                    </div>
+                    <!-- </app-card> -->
+                  </div>
+
+
+                </div>
+              </div>
+
+            </ng-template>
+          </ngb-tab>
+
+          <ngb-tab title="En cour" [id]="1">
+            <ng-template ngbTabContent>
+              <div class="m-t-15">
+                <!-- info card start -->
+                <div class="card">
+                  <div class="col-sm-12">
+                    <div class="card-header">
+                      <h5 class="card-header-text">Liste des taches en cour</h5>
+                    </div>
+
+                    <div class="container">
+
+                      <div class="row">
+
+
+                        <div class="col-md-6 col-lg-3 offset-lg-2">
+
+
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                    <label for="srch">Recherche</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="serch" type="text" [(ngModel)]="term">
+                    <div class="table-responsive">
+                      <div style="margin: 60px; overflow-x: auto">
+                        <table class="table table-hover">
+                          <thead>
+                            <ng-container matColumnDef="actions">
+                              <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                              <mat-cell *matCellDef="let row">
+                                <button mat-button>Edit</button>
+                              </mat-cell>
+                            </ng-container>
+                            <tr style="text-align: center">
+
+                              <th scope="col">Nom Tache</th>
+                              <th scope="col">Nom projet</th>
+                              <th scope="col">Date debut</th>
+                              <th scope="col">Date fin</th>
+                              <th scope="col">Opération</th>
+
+                            </tr>
+                          </thead>
+                          <ng-container *ngIf="this.listetache.length ">
+                            <tbody
+                              *ngFor="let item of this.listetache |filter:term | paginate: { itemsPerPage: 3, currentPage: p } ">
+                              <tr style="text-align: center">
+                                <td>{{item.nom_tache}}</td>
+                                <td>{{item.nom_project}}</td>
+                                <td>{{item.date_debut_tache}}</td>
+                                <td>{{item.date_fin_tache}}</td>
+                                <td>
+
+                                  <button type="button" class="btn btn-success"
+                                    (click)="this.updateEtatTache(item.id_tache,item.etat_tache,'1')">Modifier
+                                    l'etat</button>
+
+
+                                </td>
+
+                                <td>
+
+                                </td>
+                              </tr>
+                            </tbody>
+                          </ng-container>
+                          <ng-container *ngIf="this.listetache.length === 0">
+                            <tbody>
+                              <tr style="text-align: center">
+                                <td colspan="5">AUCUNE DONNE !</td>
+                              </tr>
+                            </tbody>
+                          </ng-container>
+                          <ng-container *ngIf="this.listetache[0]===null">
+                            <tbody>
+                              <tr style="text-align: center">
+                                <td colspan="5">Chargement ...</td>
+                              </tr>
+                            </tbody>
+                          </ng-container>
+
+                        </table>
+                        <center>
+                          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                        </center>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+              </div>
+            </ng-template>
+          </ngb-tab>
+
+          <ngb-tab title="Terminer" [id]="2">
+
+            <ng-template ngbTabContent>
+              <div class="m-t-15" style="position: relative;">
+                <!-- info card start -->
+                <div class="card">
+                  <div class="col-sm-12">
+                    <div class="card-header">
+                      <h5 class="card-header-text">Liste des taches terminer</h5>
+                    </div>
+
+                    <div class="container">
+
+
+                    </div>
+
+
+                    <label for="srch">Recherche</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="serch" type="text" [(ngModel)]="term">
+
+                    <div class="table-responsive">
+                      <div style="margin: 60px; overflow-x: auto">
+                        <table class="table table-hover">
+                          <thead>
+                            <ng-container matColumnDef="actions">
+                              <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                              <mat-cell *matCellDef="let row">
+                                <button mat-button>Edit</button>
+                              </mat-cell>
+                            </ng-container>
+                            <tr style="text-align: center">
+
+                              <th scope="col">Nom Tache</th>
+                              <th scope="col">Nom projet</th>
+                              <th scope="col">Date debut</th>
+                              <th scope="col">Date fin</th>
+                              <th scope="col">Opération</th>
+
+                            </tr>
+                          </thead>
+                          <ng-container *ngIf="this.listetache.length ">
+                            <tbody
+                              *ngFor="let item of this.listetache |filter:term | paginate: { itemsPerPage: 3, currentPage: p } ">
+                              <tr style="text-align: center">
+                                <td>{{item.nom_tache}}</td>
+                                <td>{{item.nom_project}}</td>
+                                <td>{{item.date_debut_tache}}</td>
+                                <td>{{item.date_fin_tache}}</td>
+                                <td>
+                                  <button type="button" class="btn btn-success"
+                                    (click)="this.updateEtatTache(item.id_tache,item.etat_tache,'2')">Modifier
+                                    l'etat</button>
+
+
+                                </td>
+
+                                <td>
+
+
+
+                                </td>
+                              </tr>
+                            </tbody>
+                          </ng-container>
+                          <ng-container *ngIf="this.listetache.length === 0">
+                            <tbody>
+                              <tr style="text-align: center">
+                                <td colspan="5">AUCUNE Donne !</td>
+                              </tr>
+                            </tbody>
+                          </ng-container>
+                          <ng-container *ngIf="this.listetache[0]===null">
+                            <tbody>
+                              <tr style="text-align: center">
+                                <td colspan="5">Chargement ...</td>
+                              </tr>
+                            </tbody>
+                          </ng-container>
+
+                        </table>
+                        <center>
+                          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                        </center>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+              </div>
+            </ng-template>
+          </ngb-tab>
+
+
+        </ngb-tabset>
+
+      </div>
+    </div>
+
+
+  </div>
+</ng-container>

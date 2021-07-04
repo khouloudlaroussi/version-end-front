@@ -1,0 +1,62 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{this.titre}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form name="form" #f="ngForm" novalidate>
+  <div class="modal-body">
+
+    <div class="form-group">
+      <label for="exampleInputEmail1">Nom Projet</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nom Projet" name="nomp"
+        [(ngModel)]="this.model.nomp" #nomp="ngModel" [ngClass]="{ 'is-invalid': (nomp.invalid) && nomp.touched }"
+        required>
+      <div *ngIf="(nomp.invalid) && nomp.touched" class="invalid-feedback">
+        <div *ngIf="nomp.errors.required">Nom projet Obligatoire !!
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label for="datedeb">Date debut</label>
+      <input class="form-control" type="date" id="datedeb" name="date_debut" [(ngModel)]="this.model.date_debut"
+        #date_debut="ngModel" [ngClass]="{ 'is-invalid': ( date_debut.invalid) && date_debut.touched }" required />
+      <div *ngIf="(date_debut.invalid) && date_debut.touched" class="invalid-feedback">
+        <div *ngIf="date_debut.errors.required">date debut Obligatoire !!</div>
+
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="datef">Date fin</label>
+      <input class="form-control" type="date" id="datef" name="date_fin" [(ngModel)]="this.model.date_fin"
+        #date_fin="ngModel" [ngClass]="{ 'is-invalid': ( date_fin.invalid) && date_fin.touched }" required />
+      <div *ngIf="(date_fin.invalid) && date_fin.touched" class="invalid-feedback">
+        <div *ngIf="date_fin.errors.required">date Fin Obligatoire !!</div>
+      </div>
+    </div>
+    <div *ngIf="date_debut.valid&&date_fin.valid&&(this.sharedservice.dateDiff(date_debut.value,date_fin.value))" >
+      <span style="color: red;">la date fin  est supérieur a la date début  </span>
+      </div>
+    <div class="form-group">
+      <label for="desc">Description</label>
+      <textarea class="form-control" id="desc" rows="3" name="desc" [(ngModel)]="this.model.descrption" #desc="ngModel"
+        [ngClass]="{ 'is-invalid': ( desc.invalid) && desc.touched }" required minlength="5"></textarea>
+      <div *ngIf="(desc.invalid) && desc.touched" class="invalid-feedback">
+        <div *ngIf="desc.errors.required">Descrption Obligatoire !!</div>
+
+
+      </div>
+    </div>
+  </div>
+
+</form>
+<div class="modal-footer">
+  <button *ngIf="this.addp" type="button" class="btn btn-success" [disabled]="f.invalid || (date_debut.valid&&date_fin.valid&&(this.sharedservice.dateDiff(date_debut.value,date_fin.value)))"
+    (click)="add()">Ajouter</button>
+  <button *ngIf="!this.addp" type="button" class="btn btn-warning" [disabled]="f.invalid || (date_debut.valid&&date_fin.valid&&(this.sharedservice.dateDiff(date_debut.value,date_fin.value)))"
+    (click)="update()">Modifer</button>
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Annuler</button>
+</div>

@@ -1,0 +1,101 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card>
+
+     
+      <div class="card border-dark mb-3">
+        <div class="card-header bg-transparent border-dark">
+          <div id="container" style="white-space:nowrap">
+
+            <div id="image" style="display:inline;">
+              <img style="border-radius: 50%; width: 40px;" src="./../../../assets/imgsuject/user.png" alt="ssss">
+            </div>
+
+            <div id="texts" style="display:inline; white-space:nowrap;">
+              &nbsp;&nbsp;&nbsp;{{this.mySuject.nom+" "+this.mySuject.prenom}}
+            </div>
+
+          </div>
+        </div>
+        <hr>
+        <div class="card-body text-success">
+          <h5 class="card-title">{{this.mySuject.titre}}</h5>
+          <p>{{this.mySuject.description_sujet}}</p>
+        </div>
+        <hr>
+        <div class="card-footer bg-transparent border-dark">
+          <div>
+            <center> <button type="button" style="color: blue;" class="btn btn-light"
+                (click)="this.etatcom()">Commenter</button>
+            </center><br>
+          </div>
+
+          <div class="input-group mb-3" [hidden]=this.etatCom>
+            <br>
+            <input type="text" class="form-control" name="titre" [(ngModel)]="this.commentaire" #com="ngModel"
+              placeholder="Votre Commanter" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button style="height: 35px;text-align:center;" class="btn btn-primary" type="button"
+                (click)="this.addCommetare()"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                Commente</button>
+
+              <input type="file" class="form-control-file" id="exampleFormControlFile1" (change)="fileChange($event)">
+            </div>
+          </div>
+          <button type="button" class="btn btn-link" (click)="this.getListCom()">Afficher Les Commentaires</button>
+        </div>
+      </div>
+
+
+      <div class="media mt-1" style="background-color: rgb(240, 239, 239);" [hidden]="this.showCom"
+        *ngFor="let itemme of listcom">
+        <a class="media-left" href="javascript:;">
+
+          <img class="media-object img-radius comment-img" src="./../../../assets/imgsuject/user2.png"
+            alt="Generic placeholder image" style="margin-left:10px;margin-top: 14px;">
+        </a>
+
+
+
+
+
+
+        <div class="media-body">
+          <br>
+          <h6 class="media-heading">{{itemme.nom+" "+itemme.prenom}}</h6>
+          <div ngbDropdown class="card-header">
+            <button ngbDropdownToggle class="dropdown-toggle addon-btn text-muted f-right service-btn"
+              style="border: none;" id="dropdownBasic1" *ngIf="itemme.id_user==this.id_user_connecte">
+              <i class="fa fa-ellipsis-v"></i>
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+
+              <button ngbDropdownItem (click)="delete_commentare(itemme.id_commentaire)">
+                <i class="icofont icofont-trash"></i>Supprimer
+              </button>
+            </div>
+          </div>
+
+
+
+
+          <br>
+          <p class="m-b-0"> {{itemme.description}}</p>
+          <button *ngIf="itemme.data" type="button" class="btn btn-link" (click)="this.affichemedia(itemme)">Afficher le
+            fichier</button>
+
+
+
+          <div class="m-b-25">
+            <br>
+            <hr>
+            <span><a href="javascript:;" class="m-r-10 f-12"
+                (click)="addJame(itemme.id_commentaire)">j'aime</a></span><span> </span>
+          </div>
+          <hr>
+        </div>
+      </div>
+
+    </app-card>
+  </div>
+</div>
