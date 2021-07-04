@@ -18,6 +18,7 @@ import { SharedServiceService } from '../../../service/shared-service.service';
 export class ListTacheComponent implements OnInit {
   listproject: Project[] = []
   listtache: Tache[] = []
+  commance: boolean;
   p: number;
 
   id_project: string = "-1";
@@ -31,19 +32,39 @@ export class ListTacheComponent implements OnInit {
   }
   gteValue(id: string) {
     this.id_project = id;
+
     this.getAlltachebyproject(id);
   }
-  open() {
-    if(this.id_project=="-1"){
+  async open() {
+
+    if (this.id_project == "-1") {
 
       swal('Error', 'Selectioner un projet ', 'error')
 
     }
     else
-{    const modalRef = this.modalService.open(AddUpdateTacheComponent);
-    modalRef.componentInstance.id = this.id_project;//this is the id of project 
-    modalRef.componentInstance.titre = 'Remplir les champs';//titre du popup
-    modalRef.componentInstance.addp = true;//pour affiche le button add 
+      await this.serviceproject.checkProject(this.id_project).subscribe({
+        next: (data) => {
+          const donne: any = data;
+          const msg = donne.msg;
+          const error = donne.errorer;
+          if (!error) {
+            swal('Attention', 'vous ne pouvez pas ajouter de tâches a ce projet car elle deja commance', 'warning')
+
+          } else {
+            const modalRef = this.modalService.open(AddUpdateTacheComponent);
+            modalRef.componentInstance.id = this.id_project;//this is the id of project 
+            modalRef.componentInstance.titre = 'Remplir les champs';//titre du popup
+            modalRef.componentInstance.addp = true;//pour affiche le button add
+          }
+        }, error: (err) => {
+          const modalRef = this.modalService.open(AddUpdateTacheComponent);
+          modalRef.componentInstance.id = this.id_project;//this is the id of project 
+          modalRef.componentInstance.titre = 'Remplir les champs';//titre du popup
+          modalRef.componentInstance.addp = true;//pour affiche le button add
+        }
+      })
+    {
     }
 
   }

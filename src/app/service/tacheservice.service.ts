@@ -27,11 +27,11 @@ export class TacheserviceService {
 
   updateTache(tache: Tache) {
     let param1 = new HttpParams;
-    param1 = param1.set("id", tache.id_tache.toString());
-    param1 = param1.set("nom_tache", tache.nom_tache.toString());
+    param1 = param1.set("id", tache.id_tache);
+    param1 = param1.set("nom_tache", tache.nom_tache);
     param1 = param1.set("date_fin_tache", tache.date_fin_tache);
     param1 = param1.set("date_debut_tache", tache.date_debut_tache);
-    param1 = param1.set("description_tache", tache.description_tache.toString());
+    param1 = param1.set("description_tache", tache.description_tache);
     return this.httpClient.post("http://127.0.0.1/project_pfe/Tache/update_tache", param1);
   }
   deleteTache(id: string) {

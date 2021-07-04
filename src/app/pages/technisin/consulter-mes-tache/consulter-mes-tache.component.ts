@@ -77,7 +77,6 @@ export class ConsulterMesTacheComponent implements OnInit {
         const msg = donne.msg;
         const error = donne.error;
         if (!error) {
-          console.log(msg);
           
           this.listetache = msg;
         } else {

@@ -75,15 +75,6 @@ export class ListAffectationComponent implements OnInit {
 
   }
 
-
-  update(item) {
-    const modalRef = this.modalService.open(AddUpAffectationComponent);
-    modalRef.componentInstance.obj = item;
-    modalRef.componentInstance.id_project = this.id_projet;
-    modalRef.componentInstance.titre = 'Modifer une affectation';
-    modalRef.componentInstance.addp = false;
-
-  }
   deleteaffec(id: string) {
     const modalRef = this.modalService.open(DeleteAffectationComponent);
     modalRef.componentInstance.id = id;

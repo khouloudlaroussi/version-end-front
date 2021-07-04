@@ -50,28 +50,6 @@ dure:string="-1";
     }
   }
   //new fn 
-/*
- async getDureFroProject(id_project, etat) {
-    let param1 = new HttpParams;
-    param1 = param1.set('id', id_project.toString());
-    param1 = param1.set('etat', etat.toString());
-    var res="-1";
-   await  this.httpClient.get("http://127.0.0.1/project_pfe/Projet/getDureProject", { params: param1 }).subscribe({
-      next:(data)=>{
-        let resp: any;
-        resp = data;
-        let donne = resp.msg;
-        let dure=donne[0].dure.toString();
-        
-        return dure;
-        console.log(dure+"from serv ");
-      },
-      error:(err)=>{
-        
-      }}
-      );
-      
-  }*/
 
   calculateDiff(dateSent) {
     let currentDate = new Date();

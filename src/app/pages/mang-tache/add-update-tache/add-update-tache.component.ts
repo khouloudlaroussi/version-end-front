@@ -62,7 +62,9 @@ export class AddUpdateTacheComponent implements OnInit {
 
   }
   async updateTache() {
-    const tache = new Tache(this.model.date_debut,this.model.date_fin,this.model.nom_tache ,this.model.descrption, this.obj.id_tache)
+    //const tache = new Tache(this.model.date_debut,,this.model.nom_tache ,this.model.descrption, this.obj.id_tache)
+    const tache =new Tache(this.model.nom_tache,this.model.date_fin,this.model.date_debut,this.model.descrption,this.obj.id_tache)
+   // const tache = new Tache(,this.model.date_fin,this.model.nom_tache ,this.model.descrption, this.obj.id_tache)
     this.tacheserviceService.updateTache(tache).subscribe({
       next: (data) => {
         const donne: any = data;

@@ -49,4 +49,11 @@ export class ProjectService {
     return this.httpClient.post("http://127.0.0.1/project_pfe/General/active_desctive_line_tab", param1);
   }
 
+
+  checkProject(id: string) {
+    let param1 = new HttpParams;
+    param1 = param1.set('id', id.toString());
+    return this.httpClient.get("http://127.0.0.1/project_pfe/Projet/chek_project", { params: param1 });
+  }
+
 }

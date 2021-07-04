@@ -18,7 +18,7 @@
     <label>Nom technicien :</label>
     <select multiple class="form-control" id="exampleFormControlSelect2" [(ngModel)]="this.model.id_user"
       #id_user="ngModel">
-      <option *ngFor="let item of this.listuser" value="{{item.id_user }}">{{item.nom+" "+item.prenom}}</option>
+      <option *ngFor="let item of this.listuser" [selected]="item.id_user" value="{{item.id_user }}">{{item.nom+" "+item.prenom}}</option>
     </select>
   </div>
 

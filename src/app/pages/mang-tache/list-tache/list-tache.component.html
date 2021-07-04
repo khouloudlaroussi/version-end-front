@@ -45,7 +45,7 @@
           <label for="inputState">Projet</label>
           <select id="inputState" class="form-control" (change)="gteValue($event.target.value)">
             <option selected value="-1">selectione un projet</option>
-            <option *ngFor="let item of this.listproject " value="{{item.id_projet }}">{{item.nom_project}}</option>
+            <option *ngFor="let item of this.listproject " value="{{item.id_projet}}">{{item.nom_project}}</option>
           </select>
 
         </div>

@@ -36,7 +36,6 @@ export class AddUpAffectationComponent implements OnInit {
       this.model.id_tach = "";
     } else {
 
-
       this.model.id_user = this.obj.id_technician;
       this.model.id_tach = this.obj.id_tache;
     }

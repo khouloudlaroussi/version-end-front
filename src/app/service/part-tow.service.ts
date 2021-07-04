@@ -29,6 +29,12 @@ export class PartTowService {
   }
 
   
+getDataForChartpie(id:string)
+{
+  let param1 = new HttpParams;
+  param1 = param1.set('id', id.toString());
+  return this.httpClient.get("http://127.0.0.1/project_pfe/Charet/get_data_for_chart",{params:param1});
 
+}
 
 }

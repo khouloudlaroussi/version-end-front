@@ -80,11 +80,12 @@
               <span *ngIf="item.etat_tache=='1'">En cour </span>
               <span *ngIf="item.etat_tache=='2'">terminer</span>
             </td>
-            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <td> 
+              <!-- <button type="button" class="btn btn-warning" (click)="update(item)">Modifier</button> -->
 
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <button type="button" class="btn btn-danger" (click)="deleteaffec(item.id_affectation)">Annuler</button>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             
 
             </td>
           </tr>

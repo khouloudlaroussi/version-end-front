@@ -34,12 +34,6 @@ export class AffectationService {
 
     return this.httpClient.get("http://127.0.0.1/project_pfe/Affecter/get_one_affectation", { params: param1 });
   }
-  updateaffectation(affectation: Affectation) {
-    let param1 = new HttpParams;
-    param1 = param1.set(" id_technician", affectation.id_technician);
-    param1 = param1.set("id_tache", affectation.id_tache);
-    return this.httpClient.post("http://127.0.0.1/project_pfe/Affecter/update_affecter", param1);
-  }
   deleteaffectation(id: string) {
     let param1 = new HttpParams;
     param1 = param1.set("id", id);
